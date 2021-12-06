@@ -1,0 +1,16 @@
+#!/bin/sh
+  
+ts0="$(ifconfig | grep 'ts' | awk '{print $1}')"
+[ -z "${ts0}" ] && ts0="$(cat "/tmp/ts.nif")"
+
+for i in ${ts0}
+do
+        ip_segment=""
+        iptables -D FORWARD -i "$i" -j ACCEPT 2>/dev/null
+        iptables -D FORWARD -o "$i" -j ACCEPT 2>/dev/null
+        iptables -t nat -D POSTROUTING -o "$i" -j MASQUERADE 2>/dev/null
+        ip_segment="$(ip route | grep "dev $i proto" | awk '{print $1}')"
+        iptables -t nat -D POSTROUTING -s "${ip_segment}" -j MASQUERADE 2>/dev/null
+        echo "ts interface $i is stopped!"
+done
+~         

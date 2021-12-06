@@ -1,11 +1,17 @@
 #!/bin/sh
-
+  
 uci -q batch <<-EOF >/dev/null
-	delete ucitrack.@tailscale[-1]
-	add ucitrack tailscale
-	set ucitrack.@tailscale[-1].init=tailscale
-	commit ucitrack
+        delete ucitrack.@tailscale[-1]
+        add ucitrack tailscale
+        set ucitrack.@tailscale[-1].init=tailscale
+        commit ucitrack
+  delete firewall.tailscale
+        set firewall.tailscale=include
+        set firewall.tailscale.type=script
+        set firewall.tailscale.path=/etc/tailscale.start
+        set firewall.tailscale.reload=1
+        commit firewall
 EOF
 
-rm -rf /tmp/luci-*
+rm -f /tmp/luci-indexcache
 exit 0

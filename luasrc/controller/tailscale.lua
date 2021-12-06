@@ -1,9 +1,15 @@
 module("luci.controller.tailscale",package.seeall)
 
 function index()
+  if not nixio.fs.access("/etc/config/tailscale") then
+    return
+  end
 
-entry({"admin","VPN","tailscale"},cbi("tailscale"),_("TAILSCALE"),45).acl_depends = { "luci-app-tailscale" }
-entry({"admin","vpn","tailscale","status"},call("act_status"))
+  entry({"admin","vpn"}, firstchild(), "VPN", 45).dependent = false
+  entry({"admin","vpn", "tailscale"}, firstchild(), _("Tailscale")).dependent = false
+  entry({"admin", "vpn", "tailscale", "general"}, cbi("tailscale/settings"), _("Base Setting"), 1)
+  entry({"admin", "vpn", "tailscale", "log"}, form("tailscale/info"), _("Interface Info"), 2)
+  entry({"admin","vpn","tailscale","status"},call("act_status"))
 end
 
 function act_status()
