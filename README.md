@@ -1,4 +1,4 @@
-### 目前能编译安装，luci页面不显示
+### 参考luci-app-zerotier制作，目前能编译安装，luci页面不显示
 
 # Tailscale on OpenWRT
 
