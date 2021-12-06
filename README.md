@@ -1,4 +1,8 @@
+### 目前能编译安装，luci页面不显示
+
 # Tailscale on OpenWRT
+
+
 
 
 command:
