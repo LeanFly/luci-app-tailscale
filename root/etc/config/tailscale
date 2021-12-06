@@ -1,0 +1,3 @@
+config tailscale 'tailscale'
+	option enable '0'
+	option sleeptime '60'
