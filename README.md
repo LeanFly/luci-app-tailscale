@@ -5,19 +5,19 @@
 
 
 
-command:
-up          connect to tailscale,logging in if needed
-down        disconnect from tailscale
-logout      disconnect from tailscale and expire current node key
-netcheck    print an analysis of local network conditions
-ip          show current tailscale ip
-status      show state of tailscale an its connections
-ping        ping a host at the tailscale layer , see how it routed
-version     print tailscale version
-web         run a web server for controlling tailscale
-file        send or receive files
-bugreport   print a shareable identifier to help diagnose issues
-cert        get tls certs
+#### command:
+    - up          connect to tailscale,logging in if needed
+    - down        disconnect from tailscale
+    - logout      disconnect from tailscale and expire current node key
+    - netcheck    print an analysis of local network conditions
+    - ip          show current tailscale ip
+    - status      show state of tailscale an its connections
+    - ping        ping a host at the tailscale layer , see how it routed
+    - version     print tailscale version
+    - web         run a web server for controlling tailscale
+    - file        send or receive files
+    - bugreport   print a shareable identifier to help diagnose issues
+    - cert        get tls certs
 
 
 1. Extract the contents of root to your filesystem root:
