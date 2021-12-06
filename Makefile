@@ -20,3 +20,5 @@ PKG_LICENSE_FILES:=LICENSE
 PKG_MAINTAINER:=leanfly <https://github.com/LeanFly/luci-app-tailscale />
 
 include $(TOPDIR)/feeds/luci/luci.mk
+
+# call BuildPackage - OpenWrt buildroot signature
