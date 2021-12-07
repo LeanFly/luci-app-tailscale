@@ -12,7 +12,7 @@ LUCI_DEPENDS:=+libustream-openssl +ca-bundle +kmod-tun
 LUCI_PKGARCH:=all
 
 PKG_NAME:=luci-app-tailscale
-PKG_VERSION:=0.1.0
+PKG_VERSION:=0.1.1
 PKG_RELEASE:=1
 
 PKG_LICENSE:=MIT
