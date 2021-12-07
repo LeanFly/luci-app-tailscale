@@ -14,7 +14,7 @@ end
 
 function act_status()
 local e={}
-  e.running=luci.sys.call("pgrep /usr/bin/tailscale >/dev/null")==0
+  e.running=luci.sys.exec("tailscale up")
   luci.http.prepare_content("application/json")
   luci.http.write_json(e)
 end
