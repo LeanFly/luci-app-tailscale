@@ -1,17 +1,11 @@
 #!/bin/sh
-  
-uci -q batch <<-EOF >/dev/null
-        delete ucitrack.@tailscale[-1]
-        add ucitrack tailscale
-        set ucitrack.@tailscale[-1].init=tailscale
-        commit ucitrack
-  delete firewall.tailscale
-        set firewall.tailscale=include
-        set firewall.tailscale.type=script
-        set firewall.tailscale.path=/etc/tailscale.start
-        set firewall.tailscale.reload=1
-        commit firewall
-EOF
 
-rm -f /tmp/luci-indexcache
+
+# Run tailscale for the first time
+/etc/init.d/tailscale start
+# Enable tailscale at boot
+/etc/init.d/tailscale enable
+
+# 重载 rpcd 服务，以便新安装的界面能顺利显示，否则就必须关闭浏览器重新登录才能显示新安装的界面菜单
+/etc/init.d/rpcd reload
 exit 0
