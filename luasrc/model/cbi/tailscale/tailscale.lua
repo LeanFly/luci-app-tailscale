@@ -2,7 +2,7 @@ a = Map("Tailscale")
 a.tittle = translate("Tailscale")
 a.description = translate("Tailscale is an open source, cross-platform and easy to use virtual LAN")
 
-a:section(SimpleSection).template = "Tailscale/tailscale_status"
+a:section(SimpleSection).template = "Tailscale/tailscale"
 a.anonymous = true
 a.addremove = false
 
