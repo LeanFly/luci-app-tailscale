@@ -3,8 +3,6 @@
 # Tailscale on OpenWRT
 
 
-
-
 #### command:
     - up          connect to tailscale,logging in if needed
     - down        disconnect from tailscale
@@ -56,3 +54,18 @@ ls /etc/rc.d/S*tailscale*
 6. To update the version of tailscale, grab the latest version [here](https://pkgs.tailscale.com/stable/#static) of the form `1.2.10_mips` and replace the same in `/usr/bin/tailscale` and `/usr/bin/tailscaled`: `version="1.2.10_mips"`.
 
 Note: You need to have atleast 11+16 = ~27 MB of free space in `/tmp` (which is usually in RAM) to be able to use this.
+
+
+##### 清除当前编译机型的软件编译目录，以便快速测试软件更改
+    - make clean
+##### 清空所有编译目录，以便开始全新编译
+    - make dirclean
+##### 检查已选择的项目，相关编译文件是否有明显错误
+    - make check
+##### 刷新补丁文件，排查是否有补丁文件错误，能自动修正细微差异
+    - 刷新当前编译机型的内核补丁，并显示详细信息。
+        - make target/linux/refresh V=s
+##### 编译指定软件包，并显示详细信息
+    - make package/samba4/compile V=s
+##### 清理指定软件包编译目录，并显示详细信息
+    - make package/samba4/clean V=s
