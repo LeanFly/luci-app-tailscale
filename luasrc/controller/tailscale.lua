@@ -23,3 +23,4 @@ function tail_up()
   local info = luci.sys.exec("tailscale")
   local infoup = luci.sys.exec("tailscale up")
   m.Map("up", translate("uplink"),translate("uplink") .. "<br>info: <a href=' " .. infoup .. ": '>" .. infoup)
+end
