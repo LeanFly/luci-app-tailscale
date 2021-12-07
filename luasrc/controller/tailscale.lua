@@ -7,8 +7,8 @@ function index()
 
   entry({"admin","vpn"}, firstchild(), "VPN", 45).dependent = false
   entry({"admin","vpn", "tailscale"}, firstchild(), _("Tailscale")).dependent = false
-  entry({"admin", "vpn", "tailscale", "general"}, cbi("tailscale/settings"), _("Base Setting"), 1)
-  entry({"admin", "vpn", "tailscale", "log"}, form("tailscale/info"), _("Interface Info"), 2)
+  entry({"admin", "vpn", "tailscale", "general"}, cbi("Tailscale/tailscale_status"), _("Base Setting"), 1)
+  entry({"admin", "vpn", "tailscale", "log"}, form("tailscale/status"), _("Interface Status"), 2)
   entry({"admin","vpn","tailscale","status"},call("act_status"))
 end
 
