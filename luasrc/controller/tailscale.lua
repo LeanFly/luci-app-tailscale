@@ -7,7 +7,7 @@ function index()
 
   entry({"admin","vpn"}, firstchild(), "VPN", 45).dependent = false
   entry({"admin","vpn", "tailscale"}, firstchild(), _("Tailscale")).dependent = false
-  entry({"admin", "vpn", "tailscale", "up"}, 1, call("tail_up"))
+  entry({"admin", "vpn", "tailscale"}, call("tail_up"))
 
 end
 
