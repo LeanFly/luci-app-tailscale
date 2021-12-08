@@ -1,14 +1,6 @@
 #!/bin/sh
 
 
-# Run tailscale for the first time
-/etc/init.d/tailscale start
-/etc/init.d/tailscale up
-/etc/init.d/tailscale down
-/etc/init.d/tailscale ip
-/etc/init.d/tailscale status
-/etc/init.d/tailscale web
-
 uci -q batch <<-EOF >/dev/null
 	delete ucitrack.@tailscale[-1]
 	add ucitrack tailscale
