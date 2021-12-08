@@ -1,23 +1,53 @@
-a = Map("Tailscale")
-a.tittle = translate("Tailscale")
-a.description = translate("Tailscale is an open source, cross-platform and easy to use virtual LAN")
+require("luci.sys")
 
-a:section(SimpleSection).template = "Tailscale/tailscale"
-a.anonymous = true
-a.addremove = false
+if luci.sys.call("ps -w | grep tailscale |grep -v grep >/dev/null") == 0 then
+	m = Map("tailscale", translate("tailscale"), "%s - %s" %{translate("tailscale"), translate("<strong><font color=\"green\">Running</font></strong>")})
+else
+	m = Map("tailscale", translate("tailscale"), "%s - %s" %{translate("tailscale"), translate("<strong><font color=\"red\">Not Running</font></strong>")})
+end
 
-e = t:option(Flag, "enable", translate("Enable"))
-e.default = 0
-e.rmempty = false
 
-e = t:option(DynamicList, "up", translate("Tailscale up"))
-e.default = ""
-e.rmempty = false
+------------------------------------------------------------
+s = m:section(TypedSection, "base_arg", translate("base info"))
+s.anonymous = true
 
-e = t:option(Flag, "down", translate("Tailscale down"))
+o = s:option(Button,"up",translate("up"))
+o.inputstyle = "apply"
+o.write = function()
+  luci.sys.call("cat /dev/null > /usr/share/tailscale/up.link") 
+  luci.http.redirect(luci.dispatcher.build_url("admin", "vpn", "taiscale"))
+end
+------------------------------------------------------------
 
-e = t:option(Flag, "ip", translate("Tailscale ip"))
+s=m:section(TypedSection,"base",translate("Update Log"))
+s.anonymous=true
+local a="/var/log/tailscale.log"
+tvlog=s:option(TextValue,"sylogtext")
+tvlog.rows=16
+tvlog.readonly="readonly"
+tvlog.wrap="off"
 
-e = t:option(DummyValue, "opennewwindow", translate("<input type=\"button\" class=\"cbi-button cbi-button-apply\" value=\"tailscale.com\" onclick=\"window.open('https://login.tailscale.com')\" />"))
-e.description = translate("Login and manage your tailscale network")
-return a
+function tvlog.cfgvalue(s,s)
+	sylogtext=""
+	if a and nixio.fs.access(a) then
+		sylogtext=luci.sys.exec("tail -n 100 %s"%a)
+	end
+	return sylogtext
+end
+
+tvlog.write=function(s,s,s)
+end
+
+local apply = luci.http.formvalue("cbi.apply")
+if apply then
+	io.popen("/etc/init.d/tailscale up &")
+end
+
+return m
+
+------------------------------------------------------------
+
+
+
+
+------------------------------------------------------------
