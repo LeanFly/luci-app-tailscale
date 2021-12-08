@@ -3,7 +3,7 @@ module("luci.controller.tailscale",package.seeall)
 function index()
 
   entry({"admin","vpn"}, firstchild(), "VPN", 45).dependent = false
-  entry({"admin", "vpn", "Taiscale"}, cbi("tailscale"), _("Tailscale穿透"))
+  entry({"admin", "vpn", "taiscale"}, cbi("tailscale"), _("Tailscale穿透"))
   -- entry({"admin","vpn", "Tailscale"}, firstchild(), _("Tailscale")).dependent = false
   -- entry({"admin", "vpn", "tailscale"}, call("tail_up"))
 
