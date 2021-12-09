@@ -1,4 +1,6 @@
-### 参考luci-app-zerotier制作，能编译安装，没有luci界面，第一次运行需要进入控制台：tailscale up 启动，根据返回的注册链接绑定设备
+### 参考luci-app-zerotier制作，能编译安装，没有luci界面
+    - 第一次运行需要进入控制台：tailscale up 启动，根据返回的注册链接绑定设备
+    - 如果出现：failed to connect to local tailscaled……这样的报错，执行一下：/etc/init.d/tailscale start，再执行：tailscale up
 
 # Tailscale on OpenWRT
 
