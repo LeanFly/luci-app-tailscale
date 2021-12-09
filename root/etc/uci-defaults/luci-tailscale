@@ -2,8 +2,6 @@
 
 # Run tailscale for the first time
 /etc/init.d/tailscale start
-# Enable tailscale at boot
-/etc/init.d/tailscale enable
 /etc/init.d/tailscale up
 /etc/init.d/tailscale down
 /etc/init.d/tailscale ip
